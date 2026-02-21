@@ -28,7 +28,8 @@ This plugin makes systemd containers work in Kubernetes **without requiring priv
 ## Roadmap
 
 - ✅ Initial POC implementation
-- 🔄 CI/CD with GitHub Actions and container image builds
+- ✅ CI/CD with GitHub Actions. Build, Test, Lint
+- 🔄 Multiarch builds, Container image build
 - 🔄 Kustomize support or alternative auto-install solution
 - 🔄 Opt-in/opt-out via annotations (e.g., `io.systemd.container=true`)
 - 🔄 Configurable cgroup RW via annotation (independent of systemd entrypoint detection)
