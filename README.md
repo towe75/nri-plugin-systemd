@@ -1,4 +1,4 @@
-# Systemd NRI Plugin
+# Kubernetes NRI Plugin for systemd containers
 
 An [NRI](https://github.com/containerd/nri) (Node Resource Interface) plugin that enables systemd containers to run in Kubernetes by modifying the container runtime spec before container creation.
 
@@ -69,9 +69,9 @@ With cgroup v2 unified hierarchy, `/sys/fs/cgroup` is mounted read-only by defau
 
 
 The plugin preserves all existing cgroup mount attributes and only modifies the mount if it's read-only:
-- Detects the existing cgroup mount type (`cgroup` or `cgroup2`)
+- Detects the existing cgroup mount options
 - Replaces `ro` option with `rw` while keeping all other options intact
-- Returns an error if no cgroup mount exists (systemd requires cgroups)
+- Skips to modify the runtime spec if no cgroup mount is found
 
 ### Systemd Detection
 
@@ -79,6 +79,8 @@ The plugin automatically detects systemd containers by checking the container's 
 - `/sbin/init`
 - `/lib/systemd/systemd`
 - `/usr/lib/systemd/systemd`
+
+Otherwise it does not modify the runtime spec.
 
 Future versions may support annotation-based opt-in or opt-out.
 
